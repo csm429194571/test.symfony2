@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('style/css/reset.css') }}" rel="stylesheet" type="text/css" media="screen">
+    <link href="{{ asset('style/css/login.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block body %}
+<input id="idInput" type="hidden" value="company">
+<div class="container clearfix">
+    <div class="secR">
+        <!--------表单内容------------>
+        <form action="{{ path('AdminLogin') }}" method="post" name="frmLogin" id="loginForm">
+            <div class="form">
+                <h1>用户管理系统</h1>
+                <div class="item clearfix">
+                    <label for="userNameIpt"></label>
+                    <input type="text" tabindex="1" id="userNameIpt" name="username" notnull="true" info="用户名" placeholder="请输入登录账号" value="" autofocus require>
+                </div>
+                <div class="item itempass clearfix">
+                    <label for="password"></label>
+                    <input type="password" tabindex="2" id="password" name="password" notnull="true" info="密码" autocomplete="off" placeholder="请输入密码" require autofocus>
+                </div>
+                <div class="item">
+                    <button type="button" tabindex="5" onclick="loginSubmit();" id="btnSubmit" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script id="jsBase" type="text/javascript" src="{{ asset('style/js/base.js') }}"></script>
+<script type="text/javascript" src="{{ asset('style/js/jquery-1.7.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('style/js/jquery.cookie.js') }}"></script>
+<script type="text/javascript" src="{{ asset('style/js/md5.js') }}"></script>
+<script type="text/javascript" src="{{ asset('style/js/validate.js') }}"></script>
+<script type="text/javascript">
+    function loginSubmit() {
+        if (verification()) {
+            $("#loginForm").submit();
+        }
+    }
+
+    $(function() {
+        
+    });
+    
+</script>
+{% endblock %}
+
+

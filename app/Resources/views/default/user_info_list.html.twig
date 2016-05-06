@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block body %}   
+  <div class="content-wrapper">
+    <section class="content-header">
+        <span class="button">
+          用户信息管理列表
+        </span>
+        <span>
+            <a class="button button2" href="{{ path('user_add') }}"> 添加用户 </a>
+        </span>
+        <span>
+            <a class="button button2" href="{{ path('AdminLogout') }}"> 退出系统 </a>
+        </span>
+    </section>
+        <p></p>
+    <!-- Main content -->
+    <section class="content">
+        <div class="box-body">
+          <table border=1 cellspacing=0 cellpadding=0 id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>用户ID</th>
+              <th>账号</th>
+              <th>性别</th>
+              <th>邮箱</th>
+              <th>电话</th>
+              <th>QQ</th>
+              <th>管理员</th>
+              <th>添加时间</th>
+              <th>更新时间</th>
+              <th>状态</th>
+              <th colspan="2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in list %}
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.username }}</td>
+              <td>{% if item.sex == 1 %}男{% endif %}{% if item.sex == 2 %}女{% endif %}{% if item.sex == 0 %}保密{% endif %}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.mobile }}</td>
+              <td>{{ item.qq }}</td>
+              <td>{% if item.user_type == 1 %}是{% endif %}{% if item.user_type == 0 %}否{% endif %}</td>
+              <td>{{ item.register_time|date("Y-m-d H:i:s") }}</td>
+              <td>{{ item.update_time|date("Y-m-d H:i:s") }}</td>
+              <td>{% if item.is_effect == 1 %}有效{% endif %}{% if item.is_effect == 0 %}无效{% endif %}</td>
+              <td><a href="{{ path('user_edit',{'user_id':item.id}) }}" class="button2">编辑</a></td>
+              <td><a href="{{ path('user_delete',{'user_id':item.id}) }}" class="button2">删除</a></td>
+            </tr>
+            {% endfor %}
+            </tfoot>
+          </table>
+        </div>
+    </section>
+  </div>
+{% endblock %}
+{% block stylesheets %}
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+        }
+
+        .button1 {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .button2:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        table{border:1px solid gray;}
+        table th{color:#4CAF50;width:8%;text-align: center;}
+        table tr td{width:8%;text-align: center;}
+    </style>
+{% endblock %}
